@@ -44,7 +44,6 @@ exports.list = (req, res) => {
   let order = req.query.order ? req.query.order : 'asc';
   let sortBy = req.query.sortBy ? req.query.sortBy : 'name';
 
-
   Videogame.find()
     .select("-photo")
     .populate("category")
@@ -57,6 +56,11 @@ exports.list = (req, res) => {
       }
       res.json({data});
     });
+}
+
+exports.read = (req, res) => {
+  req.videogame.photo = undefined
+  return res.json(req.videogame)
 }
 
 exports.remove = (req, res) => {
